@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 class OrganisationRepository extends BaseRepository implements OrganisationRepositoryContract
 {
 
-    protected $modelClass = Organisation::class;
+    protected ?string $modelClass = Organisation::class;
 
     public function getUsers(Organisation $organisation): Collection
     {

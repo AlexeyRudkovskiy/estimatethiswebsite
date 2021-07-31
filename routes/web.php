@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', '/app');
+
 Route::get('/{any}', function () {
     return view('layouts.entry');
 })->where('any', '.*');
