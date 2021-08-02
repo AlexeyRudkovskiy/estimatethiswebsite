@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
  * Class Organisation
  * @package App\Models
  *
- * @property string $title
+ * @property string $name
  * @property Collection<User> $users
  */
 class Organisation extends Model
@@ -20,7 +20,7 @@ class Organisation extends Model
     use HasUUID;
 
     protected $fillable = [
-        'title'
+        'name'
     ];
 
     public function users()

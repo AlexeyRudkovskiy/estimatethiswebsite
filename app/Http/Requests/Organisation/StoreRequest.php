@@ -2,16 +2,13 @@
 
 namespace App\Http\Requests\Organisation;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\ForOrganisationRequest;
 use Illuminate\Validation\Rule;
 
-class StoreRequest extends FormRequest
+class StoreRequest extends ForOrganisationRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
+    /** @inheritDoc */
     public function authorize()
     {
         return true;
@@ -25,7 +22,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => [ 'required', 'string', Rule::unique('organisations') ]
+            'name' => [ 'required', 'string', Rule::unique('organisations') ]
         ];
     }
 }

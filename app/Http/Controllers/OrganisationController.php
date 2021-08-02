@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Repositories\OrganisationRepositoryContract;
 use App\Http\Requests\Organisation\StoreRequest;
-use App\Http\Resources\Organisation\OrganisationCollection;
+use App\Http\Requests\Organisation\UpdateRequest;
 use App\Http\Resources\Organisation\OrganisationResource;
 use App\Models\Organisation;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class OrganisationController extends Controller
@@ -45,31 +46,44 @@ class OrganisationController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $requestData = $request->only(['title']);
+        $requestData = $request->only([ 'name' ]);
+        /** @var Organisation $organisation */
         $organisation = $this->repository->create($requestData);
+
+        $organisation->users()->attach($request->user()->id, [
+            'role_id' => Role::first()->id /// todo: change it with predefined role
+        ]);
+
         return new OrganisationResource($organisation);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Organisation  $organisation
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @return OrganisationResource
      */
-    public function update(Request $request, Organisation $organisation)
+    public function update(UpdateRequest $request)
     {
-        //
+        $payload = [
+            'name' => $request->name
+        ];
+
+        $organisation = $this->repository->update($request->organisation_id, $payload);
+
+        return new OrganisationResource($organisation);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Organisation  $organisation
+     * @param string $organisation_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Organisation $organisation)
+    public function destroy(string $organisation_id)
     {
-        //
+        return response()->json(
+            $this->repository->delete($organisation_id)
+        );
     }
 }
