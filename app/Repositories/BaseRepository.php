@@ -38,4 +38,10 @@ class BaseRepository implements BaseRepositoryContract
         return $object;
     }
 
+    public function delete(string $id)
+    {
+        $item = $this->find($id);
+        return $item->delete();
+    }
+
 }

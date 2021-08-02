@@ -18,4 +18,6 @@ interface BaseRepositoryContract
 
     public function update(string $id, array $data): Model;
 
+    public function delete(string $id);
+
 }

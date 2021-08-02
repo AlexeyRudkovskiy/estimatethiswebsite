@@ -18,7 +18,7 @@ class OrganisationResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'title' => $this->title,
+            'name' => $this->name,
             'users_count' => $this->users()->count(),
             'created_at' => (new Carbon($this->created_at))->toDateTimeString()
         ];

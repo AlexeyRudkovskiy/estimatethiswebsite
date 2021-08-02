@@ -6,6 +6,13 @@ use App\Models\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Role
+ * @package App\Models
+ *
+ * @property array $permissions
+ * @property string $name
+ */
 class Role extends Model
 {
     use HasFactory;
@@ -17,6 +24,12 @@ class Role extends Model
     ];
 
     protected $casts = [
-        'permissions' => 'json'
+        'permissions' => 'array'
     ];
+
+    public function isAllowed(string $permission): bool
+    {
+        return in_array($permission, $this->permissions);
+    }
+
 }

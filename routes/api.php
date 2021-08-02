@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrganisationController;
+use App\Http\Middleware\SetDefaultOrganisation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +25,14 @@ Route::name('api.')
         Route::middleware('auth:sanctum')
             ->group(function () {
                 Route::get('/me', [ AuthController::class, 'me' ])->name('me');
+
+                Route::put('/organisation', [ OrganisationController::class, 'store' ])->name('organisation_create');
+
+                Route::middleware(SetDefaultOrganisation::class)
+                    ->prefix('organisation/{organisation_id}')
+                    ->group(function() {
+                        Route::post('/', [ OrganisationController::class, 'update' ])->name('organisation_update');
+                        Route::delete('/', [ OrganisationController::class, 'destroy' ])->name('organisation_destroy');
+                    });
             });
     });

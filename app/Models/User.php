@@ -56,8 +56,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected ?Role $role = null;
+
     public function organisations(): BelongsToMany
     {
-        return $this->belongsToMany(Organisation::class);
+        return $this->belongsToMany(Organisation::class)
+            ->withPivot('role_id');
     }
+
+    public function makeDefaultOrganisation(string $organisationId)
+    {
+        $organisation = $this->organisations()
+            ->where('organisation_id', $organisationId)
+            ->first();
+
+        $this->role = Role::findOrFail($organisation->pivot->role_id);
+    }
+
+    public function isAllowed(string $permission): bool
+    {
+        return $this->role->isAllowed($permission);
+    }
+
 }
