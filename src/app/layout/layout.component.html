@@ -1,2 +1,3 @@
-<thin-layout></thin-layout>
+<empty-layout *ngIf="layout === 'empty'"></empty-layout>
+<thin-layout *ngIf="layout !== 'empty'"></thin-layout>
 

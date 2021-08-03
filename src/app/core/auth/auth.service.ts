@@ -74,11 +74,11 @@ export class AuthService
             return throwError('User is already logged in.');
         }
 
-        return this._httpClient.post('api/auth/sign-in', credentials).pipe(
+        return this._httpClient.post('api/login', credentials).pipe(
             switchMap((response: any) => {
 
                 // Store the access token in the local storage
-                this.accessToken = response.accessToken;
+                this.accessToken = response.token;
 
                 // Set the authenticated flag to true
                 this._authenticated = true;
@@ -98,8 +98,10 @@ export class AuthService
     signInUsingToken(): Observable<any>
     {
         // Renew token
-        return this._httpClient.post('api/auth/refresh-access-token', {
-            accessToken: this.accessToken
+        return this._httpClient.get('api/me', {
+            headers: {
+                Authorization: `Bearer ${this.accessToken}`
+            }
         }).pipe(
             catchError(() =>
 
@@ -107,9 +109,6 @@ export class AuthService
                 of(false)
             ),
             switchMap((response: any) => {
-
-                // Store the access token in the local storage
-                this.accessToken = response.accessToken;
 
                 // Set the authenticated flag to true
                 this._authenticated = true;
@@ -143,9 +142,23 @@ export class AuthService
      *
      * @param user
      */
-    signUp(user: { name: string; email: string; password: string; company: string }): Observable<any>
+    signUp(user: { name: string; email: string; password: string }): Observable<any>
     {
-        return this._httpClient.post('api/auth/sign-up', user);
+        return this._httpClient.post('api/register', user).pipe(
+            catchError(() =>
+                // Return false
+                of(false)
+            ),
+            switchMap((response: any) => {
+                this._authenticated = true;
+
+                this._userService.user = response.user;
+
+                this.accessToken = response.token;
+
+                return of(true);
+            })
+        );
     }
 
     /**
