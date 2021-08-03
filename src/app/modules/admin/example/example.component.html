@@ -1,0 +1,85 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <mat-drawer-container class="flex-auto">
+
+        <!-- Drawer -->
+        <mat-drawer
+            class="w-72 dark:bg-gray-900"
+            [autoFocus]="false"
+            [mode]="'side'"
+            [opened]="true"
+            #matDrawer>
+            <!-- Demo sidebar -->
+            <div>
+
+                <!-- Fixed demo sidebar -->
+                <fuse-vertical-navigation
+                    [appearance]="'classic'"
+                    [navigation]="menuData"
+                    [inner]="true"
+                    [mode]="'side'"
+                    [name]="'demo-sidebar-navigation'"
+                    [opened]="true"></fuse-vertical-navigation>
+
+                <!-- Storage -->
+                <div class="mx-6 mt-2">
+                    <div class="flex items-center">
+                        <mat-icon
+                            class="mr-2 icon-size-5"
+                            [svgIcon]="'heroicons_solid:database'"></mat-icon>
+                        <div class="text-lg font-semibold">Storage</div>
+                    </div>
+                    <div class="flex flex-col flex-auto mt-4">
+                        <span class="text-sm leading-none mb-3">19.9 GB of 100 GB used</span>
+                        <mat-progress-bar
+                            [mode]="'determinate'"
+                            [color]="'primary'"
+                            [value]="19.9"></mat-progress-bar>
+                    </div>
+                </div>
+
+            </div>
+
+        </mat-drawer>
+
+        <mat-drawer-content class="flex flex-col">
+
+            <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+                <div class="flex-1 min-w-0">
+                    <!-- Breadcrumbs -->
+                    <div>
+                        <div class="hidden sm:flex flex-wrap items-center font-medium">
+                            <div>
+                                <a class="whitespace-nowrap text-primary-500">Projects</a>
+                            </div>
+                            <div class="flex items-center ml-1 whitespace-nowrap">
+                                <mat-icon
+                                    class="icon-size-5 text-secondary"
+                                    [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                                <span class="ml-1 text-secondary">Flowers</span>
+                            </div>
+                            <div class="flex items-center ml-1 whitespace-nowrap">
+                                <mat-icon class="ml-2" svgIcon="lock">lock</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Title -->
+                    <div class="mt-2">
+                        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                            Estimations
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-auto p-6 sm:p-10">
+
+                Hello world!
+
+            </div>
+
+        </mat-drawer-content>
+
+    </mat-drawer-container>
+
+</div>
