@@ -12,7 +12,7 @@
                 <div>Already have an account?</div>
                 <a
                     class="ml-1 text-primary-500 hover:underline"
-                    [routerLink]="['/pages/authentication/sign-in']">Sign in
+                    [routerLink]="['/sign-in']">Sign in
                 </a>
             </div>
 
@@ -85,15 +85,6 @@
                     <mat-error>
                         Password is required
                     </mat-error>
-                </mat-form-field>
-
-                <!-- Company field -->
-                <mat-form-field class="w-full">
-                    <mat-label>Company</mat-label>
-                    <input
-                        id="company-confirm"
-                        matInput
-                        [formControlName]="'company'">
                 </mat-form-field>
 
                 <!-- ToS and PP -->

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SpaController extends Controller
 {
@@ -14,11 +15,16 @@ class SpaController extends Controller
         $publicFiles = File::files(public_path());
         $assetsMapping = [];
         $filenames = [
-            'runtime', 'polyfills', 'main', 'styles'
+            'runtime', 'polyfills', 'main', 'styles', 'vendor'
         ];
 
         foreach ($publicFiles as $file) {
             $filename = $file->getFilename();
+
+            if (Str::endsWith($filename, '.map')) {
+                continue ;
+            }
+
             $firstPartDash = substr($filename, 0, strpos($filename, '-'));
             $firstPartDot = substr($filename, 0, strpos($filename, '.'));
 

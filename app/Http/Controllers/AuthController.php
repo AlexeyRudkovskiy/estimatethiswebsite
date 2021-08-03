@@ -33,7 +33,7 @@ class AuthController extends Controller
             $token = $user->createToken('app-token');
             return response()->json([
                 'token' => $token->plainTextToken,
-                'user' => $user
+                'user' => new UserResource($user)
             ]);
         }
 
@@ -60,7 +60,7 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $token->plainTextToken,
-            'user' => $user
+            'user' => new UserResource($user)
         ])->setStatusCode(Response::HTTP_CREATED);
     }
 

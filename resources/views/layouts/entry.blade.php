@@ -49,6 +49,7 @@
 
 <script src="{{ asset($assetsMapping['runtime']) }}" type="module"></script>
 <script src="{{ asset($assetsMapping['polyfills']) }}" type="module"></script>
+<script src="{{ asset($assetsMapping['vendor']) }}" type="module"></script>
 <script src="{{ asset($assetsMapping['main']) }}" type="module"></script>
 
 
