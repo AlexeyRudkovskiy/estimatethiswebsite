@@ -38,3 +38,14 @@ Then, you need to create .env file:
 ```cp .env.example .env```
 
 The, you need to fill needed keys and credentials in .env file. You can do this by editing .env file in any editor you prefer.
+
+You **MUST** to provide correct database credentials!
+
+Then, you need to generate application key by running this command:
+
+```php artisan key:generate```
+
+After this step, you can create tables in database:
+
+```php atisan migrate```
+
