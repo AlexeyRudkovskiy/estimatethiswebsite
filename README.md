@@ -39,7 +39,7 @@ Then, you need to create .env file:
 
 The, you need to fill needed keys and credentials in .env file. You can do this by editing .env file in any editor you prefer.
 
-You MUST to provide correct database credentials!
+You **MUST** to provide correct database credentials!
 
 Then, you need to generate application key by running this command:
 
